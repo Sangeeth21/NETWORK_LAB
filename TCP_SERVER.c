@@ -25,11 +25,11 @@ void func(int connfd)
 		bzero(buff, MAX);
 		n = 0;
 		// copy server message in the buffer
-		while ((buff[n++] = getchar()) != '\n')
+		while ((buff[n++] = getchar()) != '\n')       //aa statement theerunila
 			;
 
 		// and send that buffer to client
-		write(connfd, buff, sizeof(buff));
+		write(connfd, buff, sizeof(buff));         //server il nin client nn reply kodukanam
 
 		// if msg contains "Exit" then server exit and chat ended.
 		if (strncmp("exit", buff, 4) == 0) {
@@ -56,12 +56,12 @@ int main()
 	bzero(&servaddr, sizeof(servaddr));
 
 	// assign IP, PORT
-	servaddr.sin_family = AF_INET;
-	servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
-	servaddr.sin_port = htons(PORT);
+	servaddr.sin_family = AF_INET; // server address inte family(Eth network family)-inbuilt functions
+	servaddr.sin_addr.s_addr = htonl(INADDR_ANY);    //host to network norm(hton)
+	servaddr.sin_port = htons(PORT); //connection establish cheyunna port[PORT]  depending upon the size l or s
 
 	// Binding newly created socket to given IP and verification
-	if ((bind(sockfd, (SA*)&servaddr, sizeof(servaddr))) != 0) {
+	if ((bind(sockfd, (SA*)&servaddr, sizeof(servaddr))) != 0) {  //bind nn parayuna function ipala varane  SA*-server address pointer
 		printf("socket bind failed...\n");
 		exit(0);
 	}
@@ -69,7 +69,7 @@ int main()
 		printf("Socket successfully binded..\n");
 
 	// Now server is ready to listen and verification
-	if ((listen(sockfd, 5)) != 0) {
+	if ((listen(sockfd, 5)) != 0) {   //listen function
 		printf("Listen failed...\n");
 		exit(0);
 	}
